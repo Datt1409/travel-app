@@ -10,6 +10,7 @@ import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import useRentModal from "@/app/hooks/useRentModal";
 import { ModifiedUser } from "@/app/types/type";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: ModifiedUser | null;
@@ -20,6 +21,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
+  const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
@@ -57,10 +59,19 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="Trips" />
-                <MenuItem onClick={() => {}} label="Favorites" />
-                <MenuItem onClick={() => {}} label="Reservations" />
-                <MenuItem onClick={() => {}} label="Properties" />
+                <MenuItem onClick={() => router.push("/trips")} label="Trips" />
+                <MenuItem
+                  onClick={() => router.push("/favorites")}
+                  label="Favorites"
+                />
+                <MenuItem
+                  onClick={() => router.push("/reservations")}
+                  label="Reservations"
+                />
+                <MenuItem
+                  onClick={() => router.push("/properties")}
+                  label="Properties"
+                />
                 <MenuItem onClick={rentModal.onOpen} label="Home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Log out" />

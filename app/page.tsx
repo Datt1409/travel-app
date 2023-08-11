@@ -1,11 +1,18 @@
-import getListing from "./actions/getListing";
+import getCurrentUser from "./actions/getCurrentUser";
+import getListings, { IListingParams } from "./actions/getListing";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyPage from "./components/EmptyPage";
+import ListingCard from "./components/listings/ListingCard";
 
-export default async function Home() {
-  const listing = await getListing();
-  if (listing.length === 0) {
+interface HomeProps {
+  searchParams: IListingParams;
+}
+
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams);
+  const currentUser = await getCurrentUser();
+  if (listings.length === 0) {
     return (
       <ClientOnly>
         <EmptyPage showReset />
@@ -13,13 +20,26 @@ export default async function Home() {
     );
   }
 
+  // Test error page
+  // throw new Error("Something went wrong!");
+
   return (
     <ClientOnly>
       <Container>
         <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-          My future lisings
+          {listings.map((listing) => {
+            return (
+              <ListingCard
+                currentUser={currentUser}
+                key={listing.id}
+                data={listing}
+              />
+            );
+          })}
         </div>
       </Container>
     </ClientOnly>
   );
-}
+};
+
+export default Home;
