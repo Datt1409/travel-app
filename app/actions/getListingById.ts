@@ -33,5 +33,3 @@ export default async function GetListingById(params: IParams) {
     throw new Error(error);
   }
 }
-
-export const dynamic = "force-dynamic";

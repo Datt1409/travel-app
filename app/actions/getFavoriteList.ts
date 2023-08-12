@@ -24,5 +24,3 @@ export default async function getFavoriteList() {
     throw new Error(error);
   }
 }
-
-export const dynamic = "force-dynamic";

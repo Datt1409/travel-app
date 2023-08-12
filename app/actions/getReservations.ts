@@ -49,4 +49,3 @@ export default async function getReservations(params: IParams) {
     throw new Error(error);
   }
 }
-export const dynamic = "force-dynamic";
