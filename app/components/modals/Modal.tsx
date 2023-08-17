@@ -71,7 +71,7 @@ const Modal = ({
           items-center 
           flex 
           overflow-x-hidden 
-          overflow-y-auto 
+          overflow-y-auto
           fixed 
           inset-0 
           z-50 
@@ -104,7 +104,7 @@ const Modal = ({
             <div
               className="translate
               h-full
-              lg:h-auto
+              lg:h-3/4
               md:h-auto
               border-0 
               rounded-lg 
